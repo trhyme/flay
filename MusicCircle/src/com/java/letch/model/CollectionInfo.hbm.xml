@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 收藏信息 -->
+    <class name="com.java.letch.model.CollectionInfo" table="collectioninfo">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="userid" column="userid"/>
+        <property name="voicesid" column="voicesid"/>
+        <property name="date" column="date"/>
+		        
+    </class>
+</hibernate-mapping>

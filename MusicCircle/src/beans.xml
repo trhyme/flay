@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+						http://www.springframework.org/schema/mvc 
+						http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd 
+ 						http://www.springframework.org/schema/tx/spring-tx.xsd
+        				http://www.springframework.org/schema/beans/spring-beans.xsd"
+						default-autowire="byName"
+						>
+    
+	<!-- 注解驱动 -->
+	<mvc:annotation-driven/>
+	
+    <!--启用AspectJ自动代理-->
+    <aop:aspectj-autoproxy/>
+	
+	<!--扫描的包-->
+	<context:component-scan base-package="com.java.letch"/>
+	<context:component-scan base-package="com.java.letch.app"/>
+	
+	<!-- 组件扫描 -->
+	<!-- <context:component-scan base-package="rhyme.com.rhymeModel"></context:component-scan>
+	<context:component-scan base-package="rhyme.com.rhymeModelHR"></context:component-scan>
+	
+	<context:component-scan base-package="rhyme.com.rhymeController"></context:component-scan>	
+	<context:component-scan base-package="rhyme.com.hrController"></context:component-scan>	
+	
+	<context:component-scan base-package="rhyme.com.ajax_controller"></context:component-scan>
+	<context:component-scan base-package="rhyme.com.interceptor"></context:component-scan> -->
+	
+	
+	
+	
+	<!-- 定义数据源 -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<!-- <property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@127.0.0.1:1521:orcl" /> -->
+		<property name="driverClass" value="org.gjt.mm.mysql.Driver" />
+		<!-- <property name="jdbcUrl" value="jdbc:mysql://localhost/ceshi?useUnicode=true&amp;characterEncoding=UTF-8" /> -->
+		<!-- <property name="jdbcUrl" value="jdbc:mysql://120.77.62.203/leqtch?useUnicode=true&amp;characterEncoding=UTF-8" /> -->
+		<property name="jdbcUrl" value="jdbc:mysql://120.77.62.203/leqtch?useUnicode=true&amp;characterEncoding=UTF-8" />
+		
+		<!-- <property name="user" value="root" />
+		<property name="password" value="123456" /> -->
+		
+		<property name="user" value="leqtch" />
+		<property name="password" value="leqtchcom147852" />
+		
+		<property name="initialPoolSize" value="20"/> 
+		<property name="maxPoolSize" value="5000"/>
+		<property name="minPoolSize" value="20"/>
+		
+	</bean>
+	
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"></property>
+		
+		<!-- HIbernate映射文件的位置 -->
+		<property name="mappingDirectoryLocations">
+		    <list>
+		        <value>classpath:com/java/letch/model/</value>
+		    </list>
+			
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.Dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl">update</prop>
+				<prop key="current_session_context_class">thread</prop>
+			</props>
+		</property>
+		<!-- <property name="current_session_context_class">thread</property> -->
+	</bean>
+	
+	<!-- 事务管理器 -->
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	
+	<!-- 配置事物的传播特性 (事物通知)-->
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="save*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="find*"/>
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 业务处理的bean -->
+	<aop:config proxy-target-class="true">
+		<aop:advisor pointcut="(execution(* com.java.letch.*.*(..)))or(execution(* com.java.letch.controller.*.*(..)))" advice-ref="txAdvice"/>
+		<aop:advisor pointcut="(execution(* com.java.letch.model.*.*(..)))or(execution(* com.java.letch.dao.*.*(..)))" advice-ref="txAdvice"/>
+		<aop:advisor pointcut="(execution(* com.java.letch.service.*.*(..)))or(execution(* com.java.letch.dao.*.*(..)))" advice-ref="txAdvice"/>
+		<aop:advisor pointcut="(execution(* com.java.letch.app.controller.*.*(..)))or(execution(* com.java.letch.app.controller.*.*(..)))" advice-ref="txAdvice"/>
+		
+	</aop:config>
+	
+	
+	<!-- 导入面向切面编程的配置文件 -->
+	<!-- <import resource="classpath:aspect.xml"/> -->
+	<!-- 导入自定义拦截器 -->
+	<import resource="classpath:interceptor.xml"/>
+	<import resource="classpath:appuserintercept.xml"/>
+	<!-- 登录拦截器 -->
+	<!-- <import resource="classpath:hugointerceptor.xml"/> -->
+	
+	<!-- SpringMVC上传文件时,需配置MultipartResolver处理器 -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	    <!-- 指定所上传文件的总大小不能超过80M......注意maxUploadSize属性的限制不是针对单个文件,而是所有文件的容量之和 -->
+	    <property name="maxUploadSize" value="80000000"/>
+	    <property name="defaultEncoding" value="UTF-8"/> 
+	</bean>
+		  
+	<!-- SpringMVC在超出上传文件限制时,会抛出org.springframework.web.multipart.MaxUploadSizeExceededException -->
+	<!-- 该异常是SpringMVC在检查上传的文件信息时抛出来的,而且此时还没有进入到Controller方法中 -->
+	<bean id="exceptionResolver" class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	    <property name="exceptionMappings">
+	        <props>
+	            <!-- 遇到MaxUploadSizeExceededException异常时,自动跳转到/WEB-INF/jsp/error_fileupload.jsp页面 -->
+	            <prop key="org.springframework.web.multipart.MaxUploadSizeExceededException">error_fileupload</prop>
+	        </props>
+	    </property>
+	</bean>
+	
+	
+	
+	
+	<!-- 配置：Ehcache  头部加上: 
+			xmlns:p="http://www.springframework.org/schema/p"
+			xmlns:ehcache="http://ehcache-spring-annotations.googlecode.com/svn/schema/ehcache-spring" -->
+	<!-- <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">     
+    	<property name="configLocation">     
+            <value>classpath:ehcache.xml</value>     
+        </property>     
+    </bean>  -->
+    <!-- <ehcache:annotation-driven cache-manager="ehCacheManager" /> -->
+	
+	<!-- <bean id="ehCacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+		<property name="configLocation" value="classpath:ehcache.xml" />
+		</bean>
+		<ehcache:annotation-driven cache-manager="ehCacheManager" />
+	</beans> -->
+	
+	
+	
+	<!-- Spring的线程池配置 -->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+	    <!-- 线程池维护线程的最少数量 -->
+	    <property name="corePoolSize" value="5" />
+	    <!-- 允许的空闲时间 -->
+	    <property name="keepAliveSeconds" value="200" />
+	    <!-- 线程池维护线程的最大数量 -->
+	    <property name="maxPoolSize" value="10" />
+	    <!-- 缓存队列 -->
+	    <property name="queueCapacity" value="20" />
+	    <!-- 对拒绝task的处理策略 -->
+	    <property name="rejectedExecutionHandler">
+	        <bean class="java.util.concurrent.ThreadPoolExecutor$CallerRunsPolicy" />
+	    </property>
+	</bean>
+	<!-- Spring的线程池配置 -->
+	
+	
+	
+</beans>

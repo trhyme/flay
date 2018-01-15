@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 用户地理位置信息 -->
+    <class name="com.java.letch.model.AddressInfo" table="addressinfo">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="uid" column="uid"/>
+        <property name="lgd" column="lgd"/>
+        <property name="lad" column="lad"/>
+        <property name="address" column="address"/>
+        <property name="ipadr" column="ipadr"/>
+        <property name="addtime" column="addtime"/>
+        
+    </class>
+</hibernate-mapping>

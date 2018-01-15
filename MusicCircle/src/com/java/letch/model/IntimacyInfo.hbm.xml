@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 用户亲密度的信息表  -->
+    <class name="com.java.letch.model.IntimacyInfo" table="intimacyinfo">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="useroneid" column="useroneid"/>
+        <property name="usertwoid" column="usertwoid"/>
+        <property name="intimacye" column="intimacye"/>
+        <property name="addtime" column="addtime"/>
+        <property name="addnumber" column="addnumber"/>
+        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 用户签到信息表配置  -->
+    <class name="com.java.letch.model.CommentGetupInfo" table="commentgetupinfo">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="userid" column="userid"/>
+        <property name="commid" column="commid"/>
+        <property name="addtime" column="addtime"/>
+        
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.java.letch.model.view.BlackListinfoView" table="blacklistinfoview">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="mainuser" column="mainuser"/>
+        <property name="secondid" column="secondid"/>
+        <property name="addtimes" column="addtimes"/>
+        <property name="remarkes" column="remarkes"/>
+        
+        <!-- 新信息 -->
+        <property name="username" column="username"/>
+        <property name="headpic" column="headpic"/>
+        <property name="sex" column="sex"/>
+        
+    </class>
+</hibernate-mapping>

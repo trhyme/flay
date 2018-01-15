@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 礼物数据信息表 -->
+    <class name="com.java.letch.model.GiftsInfo" table="gifts">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name"/>
+        <property name="price" column="price"/>
+        <property name="pic" column="pic"/>
+        <property name="work" column="work"/>
+        <property name="sort" column="sort"/>
+        
+        <!-- 新版信息 -->
+        
+        
+    </class>
+</hibernate-mapping>

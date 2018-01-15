@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 音频视频信息表 -->
+    <class name="com.java.letch.model.view.MatchUserView" table="matchuserview">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="num" column="num"/>
+        <property name="phone" column="phone"/>
+        <property name="username" column="username"/>
+        <property name="headpic" column="headpic"/>
+        <property name="sex" column="sex"/>
+        <property name="province" column="province"/>
+        <property name="city" column="city"/>
+        <property name="area" column="area"/>
+        <property name="sign" column="sign"/>
+        <property name="ischeck" column="ischeck"/>
+        <property name="height" column="height"/>
+        <property name="friendstate" column="friendstate"/>
+        <property name="age" column="age"/>
+        <property name="voicesurl" column="voicesurl"/>
+       
+        <property name="vipid" column="vipid"/>
+        <property name="megname" column="megname"/>
+        <property name="strutus" column="strutus"/>
+        
+    </class>
+</hibernate-mapping>

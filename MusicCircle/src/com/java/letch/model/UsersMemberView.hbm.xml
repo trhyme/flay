@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 后台管理员信息类配置 -->
+    <class name="com.java.letch.model.view.UsersMemberView" table="usersmemberview">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="num" column="num"/>
+        <property name="phone" column="phone"/>
+        <property name="password" column="password"/>
+        <property name="username" column="username"/>
+        <property name="headpic" column="headpic"/>
+        <property name="sex" column="sex"/>
+        <property name="birth" column="birth"/>
+        <property name="province" column="province"/>
+        <property name="city" column="city"/>
+        <property name="area" column="area"/>
+        <property name="sign" column="sign"/>
+        <property name="money" column="money"/>
+        <property name="omsg" column="omsg"/>
+        <property name="umsg" column="umsg"/>
+        <property name="auth" column="auth"/>
+        <property name="date" column="date"/>
+        <property name="recharge" column="recharge"/>
+        <property name="openid" column="openid"/>
+        <property name="price" column="price"/>
+        <property name="contribution" column="contribution"/>
+        <property name="ischeck" column="ischeck"/>
+        <property name="types_id" column="types_id"/>
+        <property name="android_ios" column="android_ios"/>
+        
+        <!-- 新版信息 -->
+        <property name="apponlyid" column="apponlyid"/>
+        <property name="constellation" column="constellation"/>
+        <property name="height" column="height"/>
+        <property name="workes" column="workes"/>
+        <property name="friendstate" column="friendstate"/>
+        <property name="isstratus" column="isstratus"/>
+        <property name="school" column="school"/>
+        <property name="greethello" column="greethello"/>
+        <property name="voicesurl" column="voicesurl"/>
+        <property name="age" column="age"/>
+        
+        <!-- 会员信息 -->
+        <property name="megname" column="megname"/>
+        <property name="begintime" column="begintime"/>
+        <property name="endestime" column="endestime"/>
+        <property name="strutus" column="strutus"/>
+        <property name="disabls" column="disabls"/>
+        
+    </class>
+</hibernate-mapping>

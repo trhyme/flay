@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 用户信息认证审核信息类  -->
+    <class name="com.java.letch.model.ToexamineInfo" table="toexamineinfo">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="uid" column="uid"/>
+        <property name="uuid" column="uuid"/>
+        <property name="uphone" column="uphone"/>
+        <property name="unames" column="unames"/>
+        <property name="usex" column="usex"/>
+        <property name="certpic" column="certpic"/>
+        <property name="piclist" column="piclist"/>
+        <property name="addtime" column="addtime"/>
+        <property name="updtime" column="updtime"/>
+        <property name="stratus" column="stratus"/>
+        <property name="delstra" column="delstra"/>
+        <property name="remark" column="remark"/>
+		
+    </class>
+</hibernate-mapping>

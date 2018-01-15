@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 来访信息记录配置文件 -->
+    <class name="com.java.letch.model.view.FollowMeView" table="followmeview">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="date" column="date"/>
+        <property name="users_id" column="users_id"/>
+        <property name="followsid" column="followsid"/>
+        <property name="becknum" column="becknum"/>
+        <property name="mutualnum" column="mutualnum"/>
+        
+        <!-- 新版信息 -->
+        <property name="username" column="username"/>
+        <property name="headpic" column="headpic"/>
+       	<property name="sex" column="sex"/>
+        <property name="province" column="province"/>
+        <property name="city" column="city"/>
+        <property name="area" column="area"/>
+        <property name="sign" column="sign"/>
+        <property name="age" column="age"/>
+        <property name="friendstate" column="friendstate"/>
+        
+        
+    </class>
+</hibernate-mapping>

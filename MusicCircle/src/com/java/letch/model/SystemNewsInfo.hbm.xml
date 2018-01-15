@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 系统消息信息类配置 -->
+    <class name="com.java.letch.model.SystemNewsInfo" table="systemnewsinfo">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="title" column="title"/>
+        <property name="infos" column="infos"/>
+        <property name="userid" column="userid"/>
+        <property name="typeid" column="typeid"/>
+        <property name="imgurl" column="imgurl"/>
+        <property name="htmlurl" column="htmlurl"/>
+        <property name="stratus" column="stratus"/>
+        <property name="addtime" column="addtime"/>
+        <property name="remark" column="remark"/>
+        
+		 
+    </class>
+</hibernate-mapping>

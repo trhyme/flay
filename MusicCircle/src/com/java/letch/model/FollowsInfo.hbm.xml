@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <!-- 关注信息表 -->
+    <class name="com.java.letch.model.FollowsInfo" table="follows">
+        <id name="id" column="id">
+            <generator class="identity"/>
+        </id>
+        <property name="date" column="date"/>
+        <property name="users_id" column="users_id"/>
+        <property name="followsid" column="followsid"/>
+        
+        <!-- 新版信息 -->
+        <property name="becknum" column="becknum"/>
+        <property name="mutualnum" column="mutualnum"/>
+        
+    </class>
+</hibernate-mapping>
