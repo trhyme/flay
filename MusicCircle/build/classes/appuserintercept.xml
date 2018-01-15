@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+						http://www.springframework.org/schema/mvc 
+						http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd 
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-3.0.xsd 
+						http://www.springframework.org/schema/aop 
+						http://www.springframework.org/schema/aop/spring-aop-3.0.xsd 
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx-3.0.xsd ">
+	<!-- 自定义，判断APP用户是否登录的拦截器  多个拦截器  -->
+	<mvc:interceptors>
+	    <mvc:interceptor>
+	        <!-- <mvc:mapping path="/appindexdata"/>   首页数据 -->
+	        <mvc:mapping path="/appuserphotoload"/>   	<!-- 上传头像 -->
+	        <mvc:mapping path="/appindexfollow"/> 		<!-- 首页获取关注用户的信息动态 -->
+	        
+	        <mvc:mapping path="/appusershowfans"/>      <!-- 用户查看粉丝信息 -->
+	        <mvc:mapping path="/appuserfollows"/>		<!-- 添加粉丝关注信息 -->
+	        <mvc:mapping path="/appindexinfomation"/>	<!-- 首页的最新动态消息 -->
+	        
+	        <mvc:mapping path="/appusersignin"/>        <!-- 用户的签到接口 -->
+	        <mvc:mapping path="/appusergotosign"/> 		<!-- 获取签到数据 -->
+	        
+	        <!--mvc:mapping path="/phoneregister"/>  		用户第一步注册接口 -->
+	        <mvc:mapping path="/voicesregister"/> 		<!-- 注册第二步：上传声音接口 -->
+	        <mvc:mapping path="/nicknameregister"/> 	<!-- 注册第三步：修改用户昵称、性别 -->
+	        
+	       	<mvc:mapping path="/updateusersign"/>		<!-- 修改用户的个性签名 -->
+	       	<mvc:mapping path="/updatebasicdata"/> 		<!-- 修改个人基本资料 -->
+	       	<mvc:mapping path="/voicesupdate"/> 		<!-- 修改介绍语音 -->
+	       	<mvc:mapping path="/userlabelhupdate"/> 	<!-- 修改用户的标签信息 -->
+	       	<mvc:mapping path="/userhelloupdate"/> 		<!-- 修改用户的招呼内容 -->
+	       	<mvc:mapping path="/userupdateworks"/> 		<!-- 修改用户的职业信息 -->
+	       	<mvc:mapping path="/userupdateschool"/>     <!-- 修改用户的院校信息 -->
+	       	
+	       	<!-- 信息认证 -->
+	       	<mvc:mapping path="/certpicauthuplod"/> 	<!-- 用户的认证信息头像上传 -->
+	       	<mvc:mapping path="/photoauthuplod"/> 		<!-- 用户的其他照片认证上传 -->
+	       	
+	       	<!-- 信息反馈 -->
+	       	<mvc:mapping path="/userfeedback"/> 		<!-- 用户添加反馈信息 -->
+	       	
+	       	<!-- 52赫兹功能模块 -->
+	       	<mvc:mapping path="/hertzonline"/> 			<!-- 用户提交语音并返回数据 -->
+	       	
+	       	<!-- 评论模块 -->
+	       	<mvc:mapping path="/usercommentinto"/>		<!-- 用户发表评论的接口 -->
+	       	
+	       	<!-- 查看动态详情 -->
+	       	<mvc:mapping path="/voicesdetails"/> 		<!-- 查看详情 -->
+	       	
+	       	<!-- 动态接口 -->
+	        <mvc:mapping path="/voicesrelease"/>		<!-- 用户发表信息 -->
+	        
+	        <!-- 匹配信息接口 -->
+	        <mvc:mapping path="/usermatching"/> 		<!-- 用户根据条件匹配信息 -->
+	        
+	        <!-- 点赞接口 -->
+	        <mvc:mapping path="/givethumbsup"/> 		<!-- 点赞 -->
+	        
+	        <!-- 信息收藏 -->
+	        <mvc:mapping path="/giveconllection"/> 		<!-- 动态信息 -->
+	        
+	        <!-- 首页的最热消息 -->
+	        <mvc:mapping path="/voicesindexhot"/>
+	        
+	        <!-- 查看自己的发布动态 -->
+	        <mvc:mapping path="/myselfvoices"/>
+	        
+	        <!-- 删除单个动态信息 -->
+	        <mvc:mapping path="/deleteonevoice"/>
+	        
+	        <!-- 用户查看用户信息 -->
+	        <mvc:mapping path="/userseeuser"/>
+	        
+	        <!-- 会员模块 -->
+	        <mvc:mapping path="/appmembergradelist"/> 		<!-- 查询出会员的类别制度信息 -->
+	        
+	        
+	        <!-- 分享 -->
+	        <mvc:mapping path="/sharevoicesgeturl"/> 	<!-- 分享拉取链接接口 -->
+	        
+	        <!-- APP设置消息推送信息 -->
+	        <mvc:mapping path="/appsetupchange"/> 		<!-- APP设置消息推送信息入库请求 -->
+	        
+	        <!-- 黑名单信息 -->
+	        <mvc:mapping path="/appblackuserinsert"/>   <!-- 添加黑名单信息 -->
+	        <mvc:mapping path="/appblackpagelist"/>     <!-- 分页查看黑名单信息 -->
+	        <mvc:mapping path="/appblackuserremove"/> 	<!-- 移除黑名单信息 -->
+	        
+	        <!-- 用户查询会员信息 -->
+	        <mvc:mapping path="/appselectusermember"/> 	<!-- 用户查询会员信息 -->
+	        
+	        <!-- 用户查看其它用户的动态信息 -->
+	        <mvc:mapping path="/appseeothervoices"/> 	<!-- 用户查看动态信息 -->
+	        
+	        <!-- 查看自己的来访信息 -->
+	        <mvc:mapping path="/apprecenvisitlist"/> 	<!-- 用户查看来访信息 -->
+	        
+	        <!-- 我的心动接口 -->
+	        <mvc:mapping path="/appfollowinfolist"/>    <!-- 【心动我的：1】【相互心动：2】【我的心动：3】数据接口 -->
+	        
+	        <!-- 获取评论信息的接口 -->
+	        <mvc:mapping path="/appgetcommitpage"/> 	<!-- 获取评论信息接口 -->
+	        
+	        <!-- 用户获取系统消息的接口 -->
+	        <mvc:mapping path="/appusersystemlist"/>
+	        
+	        <!-- 语音评论或者回复接口 -->
+	        <mvc:mapping path="/uservoicescommentinto"/>
+	        
+	        <!-- 发表纯文字动态接口 -->
+	        <mvc:mapping path="/voicesreleasetwo"/>
+	        
+	        <!-- 用户举报接口 -->
+	        <mvc:mapping path="/userreportother"/>
+	        
+	        <!-- 评论信息的点赞 -->
+	        <mvc:mapping path="/appgetupcomment"/>
+	        
+	        <!-- 单独获取回复评论消息信息 -->
+	        <mvc:mapping path="/alonereplypage"/>
+	        
+	        <!-- 聊天接口 -->
+	        <mvc:mapping path="/getcharttoken"/>         	<!-- 用户获取token -->
+	        <mvc:mapping path="/getchartuserinfo"/>			<!-- 根据用户ID获取信息 -->
+	        <!-- 聊天接口 -->
+	        
+	        <!-- 亲密度 -->
+	        <mvc:mapping path="/appchatintimacyinto"/> 		<!-- 用户的亲密度跟新 -->
+	        
+	        <!-- 以下为优化接口 -->
+	        <!-- 用户发表动态 -->
+	        <mvc:mapping path="/userpublishstatement"/> 	<!-- 文字+图片+语音一同发表 -->
+	        
+	        <!-- 首页广场 -->
+	        <mvc:mapping path="/userindexsquare"/>
+	        
+	        <!-- 首页Banner图 -->
+	        <mvc:mapping path="/indexbannerlist"/>
+	        
+	        <!-- 修改用户的交友状态 -->
+	        <mvc:mapping path="/updateuserfriendstate"/>
+	        
+	        <!-- 用户修改昵称 -->
+	        <mvc:mapping path="/appupdateusername"/>
+	        
+	        <!-- 查看别人的动态 -->
+	        <mvc:mapping path="/yourselfvoices"/>
+	        
+	        <!-- 用户上传自己的手机极光推送唯一标识 -->
+	        <mvc:mapping path="/appupdateonlyphone"/>
+	        
+	        <!-- 用户上传经纬度 -->
+	        <mvc:mapping path="/appuploadaddress"/>
+	        
+	        <!-- 微信预支付 -->
+	        <mvc:mapping path="/weixintenpay"/>
+	        
+	        <!-- 用户的打招呼信息 -->
+	        <mvc:mapping path="/appsayhellomethod"/>
+	        
+	        <!-- 52Hz最新接口 -->
+	        <mvc:mapping path="/hertzonlinetwo"/>
+	        
+	        <!-- 查询是否关注接口 -->
+	        <mvc:mapping path="/queryuserfollows"/>
+	        
+	        <!-- 查询是否认证信息 -->
+	        <mvc:mapping path="/selectphotoauth"/>
+	        
+	        <!-- iPhone的支付判断 -->
+	        <mvc:mapping path="/selectiphoneconfigure"/>
+	        
+	        <bean class="com.java.letch.interceptor.AppUserOnlineInterceptor">
+	        </bean>
+	    </mvc:interceptor>
+			    
+	</mvc:interceptors>
+</beans>
+
+
+
+
+
+
+
+
+
+
+
